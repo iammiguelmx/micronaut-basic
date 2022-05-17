@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.task.mx
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [ annotation-api, app-name, data, data-jpa, h2, http-client, jackson-databind, java, java-application, jdbc-hikari, junit, log4j2, management, maven, netty-server, openapi, readme, shade, swagger-ui, yaml ]

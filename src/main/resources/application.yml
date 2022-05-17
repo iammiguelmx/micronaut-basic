@@ -1,0 +1,19 @@
+micronaut:
+  application:
+    name: micronautBasic
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/micronaut
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: microservices
+    password: passpass
+    schema-generate: NONE
+    dialect: mysql
+    connection-timeout: 1500
+    max-lifetime: 1500
+flyway:
+  enabled: true
+  datasources:
+    default:
+      enabled: true
+
