@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: micronautBasic
+
 datasources:
   default:
     url: jdbc:mysql://localhost:3306/micronaut?autoReconnect=true&useSSL=false
@@ -11,9 +12,10 @@ datasources:
     dialect: mysql
     connection-timeout: 1500
     max-lifetime: 1500
+
 flyway:
   enabled: true
   datasources:
     default:
-      enabled: true
+      enabled: false
 
