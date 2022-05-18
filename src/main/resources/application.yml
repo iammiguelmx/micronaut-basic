@@ -3,7 +3,7 @@ micronaut:
     name: micronautBasic
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/micronaut
+    url: jdbc:mysql://localhost:3306/micronaut?autoReconnect=true&useSSL=false
     driverClassName: com.mysql.cj.jdbc.Driver
     username: microservices
     password: passpass
