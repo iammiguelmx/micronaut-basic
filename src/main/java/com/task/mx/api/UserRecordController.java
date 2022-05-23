@@ -8,22 +8,17 @@ import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
-
 @Slf4j
-@Controller(UserController.URI)
-@RequiredArgsConstructor
+@Controller(UserRecordController.URI)
 @Secured(SecurityRule.IS_AUTHENTICATED)
-public class UserController {
+public record UserRecordController( UserService userService) {
 
-    public static final String URI = "/users";
+    public static final String URI = "/users/v2";
 
-    @NonNull
-    private final UserService userService;
 
     @NonNull
     @Post("/add")
@@ -75,4 +70,3 @@ public class UserController {
     }
 
 }
-

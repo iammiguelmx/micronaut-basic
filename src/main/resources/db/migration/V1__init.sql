@@ -7,4 +7,12 @@ create table users(
     CONSTRAINT UK_username unique (username)
 );
 
+create table token(
+                      id           bigint auto_increment primary key,
+                      username     VARCHAR(255)       NOT NULL,
+                      refresh_token VARCHAR(255)       NOT NULL,
+                      revoked      BOOl               NOT NULL,
+                      date_created TIMESTAMP          NOT NULL
+);
+
 
