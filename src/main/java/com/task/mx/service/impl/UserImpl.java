@@ -9,9 +9,7 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 
 @Slf4j

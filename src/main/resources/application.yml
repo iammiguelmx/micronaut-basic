@@ -1,6 +1,17 @@
 micronaut:
   application:
     name: micronautBasic
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        generator:
+          refresh-token:
+            secret: pleaseChangeThisSecretForANewOne
+        signatures:
+          secret:
+            generator:
+              secret: pleaseChangeThisSecretForANewOne
 
 datasources:
   default:
@@ -14,7 +25,7 @@ datasources:
     max-lifetime: 1500
 
 flyway:
-  enabled: true
+  enabled: false
   datasources:
     default:
       enabled: false
