@@ -7,32 +7,30 @@ import io.micronaut.security.errors.OauthErrorResponseException;
 import io.micronaut.security.token.event.RefreshTokenGeneratedEvent;
 import io.micronaut.security.token.refresh.RefreshTokenPersistence;
 import jakarta.inject.Singleton;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.Optional;
 
 import static io.micronaut.security.errors.IssuingAnAccessTokenErrorCode.INVALID_GRANT;
 
+@AllArgsConstructor
+@Slf4j
 @Singleton
 public class CustomRefreshTokenPersistence implements RefreshTokenPersistence {
 
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public CustomRefreshTokenPersistence(RefreshTokenRepository refreshTokenRepository) {
-        this.refreshTokenRepository = refreshTokenRepository;
-    }
-
     @Override
     public void persistToken(RefreshTokenGeneratedEvent event) {
-        if (event != null &&
-                event.getRefreshToken() != null &&
-                event.getAuthentication() != null &&
-                event.getAuthentication().getName() != null) {
-            String payload = event.getRefreshToken();
-            refreshTokenRepository.save(event.getAuthentication().getName(), payload, false);
-        }
+        Objects.requireNonNull(event, "Event is null");
+        var payload = event.getRefreshToken();
+        refreshTokenRepository.save(event.getAuthentication().getName(), payload, false, Instant.now());
     }
 
     @Override
@@ -41,10 +39,11 @@ public class CustomRefreshTokenPersistence implements RefreshTokenPersistence {
             Optional<RefreshTokenEntity> tokenOpt = refreshTokenRepository.findByRefreshToken(refreshToken);
             if (tokenOpt.isPresent()) {
                 RefreshTokenEntity token = tokenOpt.get();
-                if (token.getRevoked()) {
+                if (token.revoked()) {
+                    log.warn("Token {}" , token.refreshToken() ,"is revoked");
                     emitter.error(new OauthErrorResponseException(INVALID_GRANT, "refresh token revoked", null));
                 } else {
-                    emitter.next(Authentication.build(token.getUsername()));
+                    emitter.next(Authentication.build(token.username()));
                     emitter.complete();
                 }
             } else {
