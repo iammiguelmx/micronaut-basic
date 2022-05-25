@@ -1,17 +1,26 @@
 micronaut:
   application:
     name: micronautBasic
+endpoints:
+  prometheus:
+    sensitive: true
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+---
+micronaut:
   security:
     authentication: bearer
     token:
       jwt:
-        generator:
-          refresh-token:
-            secret: pleaseChangeThisSecretForANewOne
         signatures:
           secret:
             generator:
-              secret: pleaseChangeThisSecretForANewOne
+              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
 
 datasources:
   default:

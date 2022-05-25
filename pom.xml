@@ -33,6 +33,32 @@
 
     <dependencies>
 
+
+        <!-- https://mvnrepository.com/artifact/io.micronaut.micrometer/micronaut-micrometer-core -->
+        <dependency>
+            <groupId>io.micronaut.micrometer</groupId>
+            <artifactId>micronaut-micrometer-core</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.micrometer</groupId>
+            <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <!-- Also required to enable endpoint -->
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-management</artifactId>
+            <version>3.4.4</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.micronaut.security/micronaut-security-jwt -->
         <dependency>
             <groupId>io.micronaut.security</groupId>
@@ -197,6 +223,10 @@
                             <groupId>org.projectlombok</groupId> <!-- IMPORTANT - LOMBOK BEFORE MAPSTRUCT -->
                             <artifactId>lombok</artifactId>
                             <version>1.18.24</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut.micrometer</groupId>
+                            <artifactId>micronaut-micrometer-annotation</artifactId>
                         </path>
                         <path>
                             <groupId>io.micronaut</groupId>
